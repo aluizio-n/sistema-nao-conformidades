@@ -2,6 +2,9 @@
     "compilerOptions": {
         "module": "nodenext",
         "target": "esnext",
+        "outDir": "dist",
+        "rootDir": "src",
+        "typeRoots": ["src/types"],
         "types": [],
         "sourceMap": true,
         "declaration": true,
