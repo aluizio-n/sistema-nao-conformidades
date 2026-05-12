@@ -10,17 +10,17 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
   imports: [NavbarComponent, FormsModule, DatePipe],
   template: `
     <app-navbar />
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
       @if (nc()) {
-        <div class="animate-fade-in">
-          <button (click)="voltar()" class="text-[13px] text-slate-400 hover:text-slate-600 font-medium mb-4 flex items-center gap-1.5 transition-colors group">
-            <svg class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <div>
+          <button (click)="voltar()" class="text-sm text-slate-400 hover:text-slate-600 font-medium mb-3 flex items-center gap-1 transition-colors cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
             Voltar
           </button>
-          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6 sm:mb-10">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6 sm:mb-8">
             <div class="min-w-0">
-              <p class="text-[12px] font-mono text-slate-300 mb-1.5 bg-slate-100 inline-block px-2 py-0.5 rounded-md">{{ nc()!.numero }}</p>
-              <h2 class="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">{{ nc()!.titulo }}</h2>
+              <p class="text-xs font-mono text-slate-400 mb-1">{{ nc()!.numero }}</p>
+              <h2 class="text-lg sm:text-xl font-bold text-slate-800">{{ nc()!.titulo }}</h2>
             </div>
             <div class="flex gap-2 shrink-0">
               <span [class]="badgeGravidade(nc()!.gravidade)">{{ nc()!.gravidade }}</span>
@@ -29,46 +29,46 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
           </div>
         </div>
 
-        <!-- Mobile: gestao primeiro -->
-        <div class="lg:hidden mb-5 animate-fade-in-up" style="animation-delay: 0.05s">
-          <details class="bg-white rounded-2xl border border-slate-100 shadow-sm group">
-            <summary class="px-5 py-4 text-sm font-bold text-slate-700 cursor-pointer select-none flex items-center justify-between">
-              Gestao
-              <svg class="w-4 h-4 text-slate-300 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        <!-- Mobile: gestao -->
+        <div class="lg:hidden mb-4">
+          <details class="bg-white rounded-lg border border-slate-200">
+            <summary class="px-4 py-3 text-sm font-semibold text-slate-700 cursor-pointer select-none flex items-center justify-between">
+              Gestão
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </summary>
-            <div class="px-5 pb-5 space-y-4 border-t border-slate-100 pt-4">
+            <div class="px-4 pb-4 space-y-4 border-t border-slate-100 pt-4">
               <div>
-                <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Responsavel</label>
+                <label class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1.5">Responsável</label>
                 <select [(ngModel)]="responsavelId" (ngModelChange)="atribuirResponsavel()"
                         [disabled]="nc()!.status === 'encerrada' || nc()!.status === 'cancelada'"
-                        class="w-full px-3.5 py-2.5 bg-slate-50/80 border border-slate-200/80 rounded-xl text-[13px] outline-none focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 disabled:opacity-50 text-slate-600 hover:border-slate-300">
-                  <option [ngValue]="null">Nao atribuido</option>
+                        class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 transition-colors disabled:opacity-50 text-slate-600">
+                  <option [ngValue]="null">Não atribuído</option>
                   @for (u of usuarios(); track u.id) { <option [ngValue]="u.id">{{ u.nome }}</option> }
                 </select>
               </div>
               <div>
-                <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Prazo</label>
+                <label class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1.5">Prazo</label>
                 <input type="date" [(ngModel)]="prazo" (change)="atualizarPrazo()"
                        [disabled]="nc()!.status === 'encerrada' || nc()!.status === 'cancelada'"
-                       class="w-full px-3.5 py-2.5 bg-slate-50/80 border border-slate-200/80 rounded-xl text-[13px] outline-none focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 disabled:opacity-50 hover:border-slate-300" />
+                       class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 transition-colors disabled:opacity-50" />
               </div>
               <div>
-                <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Causa Raiz</label>
+                <label class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1.5">Causa Raiz</label>
                 <textarea [(ngModel)]="causaRaiz" rows="2"
                           [disabled]="nc()!.status === 'encerrada' || nc()!.status === 'cancelada'"
-                          class="w-full px-3.5 py-2.5 bg-slate-50/80 border border-slate-200/80 rounded-xl text-[13px] outline-none focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 resize-none disabled:opacity-50 hover:border-slate-300"
+                          class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 transition-colors resize-none disabled:opacity-50"
                           placeholder="Causa raiz..."></textarea>
                 <button (click)="salvarCausaRaiz()" [disabled]="nc()!.status === 'encerrada' || nc()!.status === 'cancelada'"
-                        class="mt-2 text-[12px] text-violet-500 hover:text-violet-600 px-3.5 py-2 rounded-xl border border-violet-200 hover:bg-violet-50 transition-all duration-200 disabled:opacity-50 font-medium">Salvar</button>
+                        class="mt-2 text-xs text-indigo-600 hover:text-indigo-700 px-3 py-1.5 rounded-md border border-indigo-200 hover:bg-indigo-50 transition-colors disabled:opacity-50 font-medium cursor-pointer">Salvar</button>
               </div>
               @if (nc()!.status !== 'encerrada' && nc()!.status !== 'cancelada') {
-                <div class="pt-4 border-t border-slate-100 space-y-2">
+                <div class="pt-3 border-t border-slate-100 space-y-2">
                   @for (s of transicoesPermitidas(); track s) {
                     <button (click)="atualizarStatus(s)"
-                            class="w-full text-left px-4 py-3 rounded-xl text-[13px] font-semibold transition-all duration-200 border active:scale-[0.98]"
-                            [class]="s === 'encerrada' ? 'border-emerald-200 bg-emerald-50/50 text-emerald-700 hover:bg-emerald-100' :
-                                     s === 'cancelada' ? 'border-rose-200 bg-rose-50/50 text-rose-600 hover:bg-rose-100' :
-                                     'border-slate-200 bg-slate-50/50 text-slate-600 hover:bg-slate-100'">
+                            class="w-full text-left px-3 py-2.5 rounded-md text-sm font-medium transition-colors border cursor-pointer"
+                            [class]="s === 'encerrada' ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100' :
+                                     s === 'cancelada' ? 'border-red-200 bg-red-50 text-red-600 hover:bg-red-100' :
+                                     'border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100'">
                       {{ formatStatus(s) }}
                     </button>
                   }
@@ -78,92 +78,87 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
           </details>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
-          <div class="lg:col-span-2 space-y-5 sm:space-y-6">
-            <!-- Info -->
-            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-7 animate-fade-in-up" style="animation-delay: 0.1s">
-              <h3 class="text-sm font-bold text-slate-700 mb-4">Descricao</h3>
-              <p class="text-[13px] text-slate-500 whitespace-pre-line leading-relaxed">{{ nc()!.descricao }}</p>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-lg border border-slate-200 p-5 sm:p-6">
+              <h3 class="text-sm font-semibold text-slate-700 mb-3">Descrição</h3>
+              <p class="text-sm text-slate-500 whitespace-pre-line leading-relaxed">{{ nc()!.descricao }}</p>
 
-              <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5 mt-5 sm:mt-6 pt-5 sm:pt-6 border-t border-slate-100">
-                <div class="space-y-1">
-                  <span class="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Tipo</span>
-                  <p class="text-[13px] font-semibold text-slate-700 capitalize">{{ nc()!.tipo }}</p>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-5 pt-5 border-t border-slate-100">
+                <div>
+                  <span class="text-xs font-medium text-slate-400 uppercase tracking-wide">Tipo</span>
+                  <p class="text-sm font-medium text-slate-700 capitalize mt-0.5">{{ nc()!.tipo }}</p>
                 </div>
-                <div class="space-y-1">
-                  <span class="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Setor</span>
-                  <p class="text-[13px] font-semibold text-slate-700">{{ nc()!.setor }}</p>
+                <div>
+                  <span class="text-xs font-medium text-slate-400 uppercase tracking-wide">Setor</span>
+                  <p class="text-sm font-medium text-slate-700 mt-0.5">{{ nc()!.setor }}</p>
                 </div>
-                <div class="space-y-1">
-                  <span class="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Linha</span>
-                  <p class="text-[13px] font-semibold text-slate-700">{{ nc()!.linha_processo }}</p>
+                <div>
+                  <span class="text-xs font-medium text-slate-400 uppercase tracking-wide">Linha</span>
+                  <p class="text-sm font-medium text-slate-700 mt-0.5">{{ nc()!.linha_processo }}</p>
                 </div>
-                <div class="space-y-1">
-                  <span class="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Aberto por</span>
-                  <p class="text-[13px] font-semibold text-slate-700">{{ nc()!.abertoPor?.nome }}</p>
+                <div>
+                  <span class="text-xs font-medium text-slate-400 uppercase tracking-wide">Aberto por</span>
+                  <p class="text-sm font-medium text-slate-700 mt-0.5">{{ nc()!.abertoPor?.nome }}</p>
                 </div>
-                <div class="space-y-1">
-                  <span class="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Abertura</span>
-                  <p class="text-[13px] font-semibold text-slate-700">{{ nc()!.abertura_em | date:'dd/MM/yy HH:mm' }}</p>
+                <div>
+                  <span class="text-xs font-medium text-slate-400 uppercase tracking-wide">Abertura</span>
+                  <p class="text-sm font-medium text-slate-700 mt-0.5">{{ nc()!.abertura_em | date:'dd/MM/yy HH:mm' }}</p>
                 </div>
                 @if (nc()!.encerramento_em) {
-                  <div class="space-y-1">
-                    <span class="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Encerramento</span>
-                    <p class="text-[13px] font-semibold text-emerald-600">{{ nc()!.encerramento_em | date:'dd/MM/yy HH:mm' }}</p>
+                  <div>
+                    <span class="text-xs font-medium text-slate-400 uppercase tracking-wide">Encerramento</span>
+                    <p class="text-sm font-medium text-emerald-600 mt-0.5">{{ nc()!.encerramento_em | date:'dd/MM/yy HH:mm' }}</p>
                   </div>
                 }
               </div>
 
               @if (nc()!.causa_raiz) {
-                <div class="mt-5 sm:mt-6 pt-5 sm:pt-6 border-t border-slate-100">
-                  <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Causa Raiz</span>
-                  <p class="text-[13px] text-slate-600 mt-1.5 whitespace-pre-line leading-relaxed bg-slate-50/70 rounded-xl p-4 border border-slate-100">{{ nc()!.causa_raiz }}</p>
+                <div class="mt-5 pt-5 border-t border-slate-100">
+                  <span class="text-xs font-medium text-slate-400 uppercase tracking-wide">Causa Raiz</span>
+                  <p class="text-sm text-slate-600 mt-1.5 whitespace-pre-line leading-relaxed bg-slate-50 rounded-md p-3 border border-slate-100">{{ nc()!.causa_raiz }}</p>
                 </div>
               }
             </div>
-
           </div>
 
           <!-- Desktop sidebar -->
-          <div class="hidden lg:block space-y-6 animate-fade-in-up" style="animation-delay: 0.2s">
-            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-5 sticky top-24">
-              <h3 class="text-sm font-bold text-slate-700 flex items-center gap-2">
-                <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                Gestao
-              </h3>
+          <div class="hidden lg:block">
+            <div class="bg-white rounded-lg border border-slate-200 p-5 space-y-4 sticky top-20">
+              <h3 class="text-sm font-semibold text-slate-700">Gestão</h3>
               <div>
-                <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Responsavel</label>
+                <label class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1.5">Responsável</label>
                 <select [(ngModel)]="responsavelId" (ngModelChange)="atribuirResponsavel()"
                         [disabled]="nc()!.status === 'encerrada' || nc()!.status === 'cancelada'"
-                        class="w-full px-3.5 py-2.5 bg-slate-50/80 border border-slate-200/80 rounded-xl text-[13px] outline-none focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 disabled:opacity-50 text-slate-600 hover:border-slate-300">
-                  <option [ngValue]="null">Nao atribuido</option>
+                        class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 transition-colors disabled:opacity-50 text-slate-600">
+                  <option [ngValue]="null">Não atribuído</option>
                   @for (u of usuarios(); track u.id) { <option [ngValue]="u.id">{{ u.nome }}</option> }
                 </select>
               </div>
               <div>
-                <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Prazo</label>
+                <label class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1.5">Prazo</label>
                 <input type="date" [(ngModel)]="prazo" (change)="atualizarPrazo()"
                        [disabled]="nc()!.status === 'encerrada' || nc()!.status === 'cancelada'"
-                       class="w-full px-3.5 py-2.5 bg-slate-50/80 border border-slate-200/80 rounded-xl text-[13px] outline-none focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 disabled:opacity-50 hover:border-slate-300" />
+                       class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 transition-colors disabled:opacity-50" />
               </div>
               <div>
-                <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Causa Raiz</label>
+                <label class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-1.5">Causa Raiz</label>
                 <textarea [(ngModel)]="causaRaiz" rows="3"
                           [disabled]="nc()!.status === 'encerrada' || nc()!.status === 'cancelada'"
-                          class="w-full px-3.5 py-2.5 bg-slate-50/80 border border-slate-200/80 rounded-xl text-[13px] outline-none focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 resize-none disabled:opacity-50 hover:border-slate-300"
+                          class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm outline-none focus:ring-2 focus:ring-indigo-500/20 transition-colors resize-none disabled:opacity-50"
                           placeholder="Causa raiz..."></textarea>
                 <button (click)="salvarCausaRaiz()" [disabled]="nc()!.status === 'encerrada' || nc()!.status === 'cancelada'"
-                        class="mt-2 text-[12px] text-violet-500 hover:text-violet-600 px-3.5 py-2 rounded-xl border border-violet-200 hover:bg-violet-50 transition-all duration-200 disabled:opacity-50 font-medium">Salvar</button>
+                        class="mt-2 text-xs text-indigo-600 hover:text-indigo-700 px-3 py-1.5 rounded-md border border-indigo-200 hover:bg-indigo-50 transition-colors disabled:opacity-50 font-medium cursor-pointer">Salvar</button>
               </div>
               @if (nc()!.status !== 'encerrada' && nc()!.status !== 'cancelada') {
-                <div class="pt-5 border-t border-slate-100 space-y-2">
-                  <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2.5">Status</label>
+                <div class="pt-4 border-t border-slate-100 space-y-2">
+                  <label class="block text-xs font-medium text-slate-500 uppercase tracking-wide mb-2">Status</label>
                   @for (s of transicoesPermitidas(); track s) {
                     <button (click)="atualizarStatus(s)"
-                            class="w-full text-left px-4 py-3 rounded-xl text-[13px] font-semibold transition-all duration-200 border active:scale-[0.98]"
-                            [class]="s === 'encerrada' ? 'border-emerald-200 bg-emerald-50/50 text-emerald-700 hover:bg-emerald-100 hover:shadow-sm' :
-                                     s === 'cancelada' ? 'border-rose-200 bg-rose-50/50 text-rose-600 hover:bg-rose-100 hover:shadow-sm' :
-                                     'border-slate-200 bg-slate-50/50 text-slate-600 hover:bg-slate-100 hover:shadow-sm'">
+                            class="w-full text-left px-3 py-2.5 rounded-md text-sm font-medium transition-colors border cursor-pointer"
+                            [class]="s === 'encerrada' ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100' :
+                                     s === 'cancelada' ? 'border-red-200 bg-red-50 text-red-600 hover:bg-red-100' :
+                                     'border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100'">
                       {{ formatStatus(s) }}
                     </button>
                   }
@@ -173,9 +168,9 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
           </div>
         </div>
       } @else {
-        <div class="text-center py-24">
-          <div class="inline-block w-10 h-10 border-[3px] border-violet-500/30 border-t-violet-500 rounded-full animate-spin"></div>
-          <p class="text-slate-400 text-sm mt-4">Carregando...</p>
+        <div class="text-center py-20">
+          <div class="inline-block w-8 h-8 border-[3px] border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
+          <p class="text-slate-400 text-sm mt-3">Carregando...</p>
         </div>
       }
     </div>
@@ -191,7 +186,6 @@ export class NcDetailComponent implements OnInit {
   responsavelId: number | null = null;
   prazo = '';
   causaRaiz = '';
-  gestaoTemplate = false;
 
   private readonly TRANSICOES: Record<string, string[]> = {
     aberta: ['em_tratamento'],
@@ -229,15 +223,15 @@ export class NcDetailComponent implements OnInit {
   }
 
   badgeGravidade(g: string): string {
-    const m: Record<string, string> = { baixa: 'text-[11px] px-2.5 py-1 rounded-lg font-semibold bg-slate-100 text-slate-500', media: 'text-[11px] px-2.5 py-1 rounded-lg font-semibold bg-amber-50 text-amber-600', alta: 'text-[11px] px-2.5 py-1 rounded-lg font-semibold bg-orange-50 text-orange-600', critica: 'text-[11px] px-2.5 py-1 rounded-lg font-semibold bg-rose-50 text-rose-600' };
+    const m: Record<string, string> = { baixa: 'text-xs px-2 py-0.5 rounded font-medium bg-slate-100 text-slate-500', media: 'text-xs px-2 py-0.5 rounded font-medium bg-amber-100 text-amber-700', alta: 'text-xs px-2 py-0.5 rounded font-medium bg-orange-100 text-orange-700', critica: 'text-xs px-2 py-0.5 rounded font-medium bg-red-100 text-red-700' };
     return m[g] ?? m['baixa']!;
   }
   badgeStatus(s: string): string {
-    const m: Record<string, string> = { aberta: 'text-[11px] px-2.5 py-1 rounded-lg font-semibold bg-sky-50 text-sky-600', em_tratamento: 'text-[11px] px-2.5 py-1 rounded-lg font-semibold bg-violet-50 text-violet-600', aguardando_verificacao: 'text-[11px] px-2.5 py-1 rounded-lg font-semibold bg-amber-50 text-amber-600', encerrada: 'text-[11px] px-2.5 py-1 rounded-lg font-semibold bg-emerald-50 text-emerald-600', cancelada: 'text-[11px] px-2.5 py-1 rounded-lg font-semibold bg-slate-50 text-slate-400' };
+    const m: Record<string, string> = { aberta: 'text-xs px-2 py-0.5 rounded font-medium bg-sky-100 text-sky-700', em_tratamento: 'text-xs px-2 py-0.5 rounded font-medium bg-indigo-100 text-indigo-700', aguardando_verificacao: 'text-xs px-2 py-0.5 rounded font-medium bg-amber-100 text-amber-700', encerrada: 'text-xs px-2 py-0.5 rounded font-medium bg-emerald-100 text-emerald-700', cancelada: 'text-xs px-2 py-0.5 rounded font-medium bg-slate-100 text-slate-400' };
     return m[s] ?? m['aberta']!;
   }
   formatStatus(s: string): string {
-    const m: Record<string, string> = { aberta: 'Aberta', em_tratamento: 'Em Tratamento', aguardando_verificacao: 'Ag. Verificacao', encerrada: 'Encerrada', cancelada: 'Cancelada' };
+    const m: Record<string, string> = { aberta: 'Aberta', em_tratamento: 'Em Tratamento', aguardando_verificacao: 'Ag. Verificação', encerrada: 'Encerrada', cancelada: 'Cancelada' };
     return m[s] ?? s;
   }
 }

@@ -6,50 +6,50 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-navbar',
   imports: [RouterLink, RouterLinkActive],
   template: `
-    <nav class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-white/[0.06] shadow-lg shadow-black/5">
+    <nav class="sticky top-0 z-50 bg-white border-b border-slate-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center gap-6 lg:gap-10">
-            <a routerLink="/app/dashboard" class="flex items-center gap-2.5 shrink-0 group">
-              <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-violet-500/20 group-hover:shadow-violet-500/40 transition-all group-hover:scale-105">
-                <span class="text-white text-sm font-bold">Q</span>
+        <div class="flex items-center justify-between h-14">
+          <div class="flex items-center gap-8">
+            <a routerLink="/app/dashboard" class="flex items-center gap-2 shrink-0">
+              <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center">
+                <span class="text-white text-xs font-bold">Q</span>
               </div>
-              <span class="text-sm font-semibold text-white tracking-tight hidden sm:block">QualidadePIM</span>
+              <span class="text-sm font-semibold text-slate-800 hidden sm:block">QualidadePIM</span>
             </a>
-            <div class="hidden md:flex gap-1 bg-white/[0.04] rounded-xl p-1">
-              <a routerLink="/app/dashboard" routerLinkActive="!bg-white/[0.12] !text-white shadow-sm"
+            <div class="hidden md:flex items-center gap-1">
+              <a routerLink="/app/dashboard" routerLinkActive="!text-indigo-600 !bg-indigo-50"
                  [routerLinkActiveOptions]="{exact: true}"
-                 class="px-3.5 py-2 rounded-lg text-[13px] font-medium text-slate-400 hover:text-slate-200 hover:bg-white/[0.06] transition-all duration-200">
+                 class="px-3 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
                 Dashboard
               </a>
-              <a routerLink="/app/ncs" routerLinkActive="!bg-white/[0.12] !text-white shadow-sm"
+              <a routerLink="/app/ncs" routerLinkActive="!text-indigo-600 !bg-indigo-50"
                  [routerLinkActiveOptions]="{exact: true}"
-                 class="px-3.5 py-2 rounded-lg text-[13px] font-medium text-slate-400 hover:text-slate-200 hover:bg-white/[0.06] transition-all duration-200">
+                 class="px-3 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
                 NCs
               </a>
-              <a routerLink="/app/ncs/nova" routerLinkActive="!bg-white/[0.12] !text-white shadow-sm"
-                 class="px-3.5 py-2 rounded-lg text-[13px] font-medium text-slate-400 hover:text-slate-200 hover:bg-white/[0.06] transition-all duration-200">
+              <a routerLink="/app/ncs/nova" routerLinkActive="!text-indigo-600 !bg-indigo-50"
+                 class="px-3 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
                 Abrir NC
               </a>
-              <a routerLink="/app/minha-fila" routerLinkActive="!bg-white/[0.12] !text-white shadow-sm"
-                 class="px-3.5 py-2 rounded-lg text-[13px] font-medium text-slate-400 hover:text-slate-200 hover:bg-white/[0.06] transition-all duration-200">
+              <a routerLink="/app/minha-fila" routerLinkActive="!text-indigo-600 !bg-indigo-50"
+                 class="px-3 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
                 Minha Fila
               </a>
             </div>
           </div>
           <div class="flex items-center gap-3">
-            <div class="flex items-center gap-2.5 bg-white/[0.04] rounded-xl px-3 py-1.5">
-              <div class="w-7 h-7 rounded-full bg-gradient-to-br from-violet-400 to-indigo-500 flex items-center justify-center ring-2 ring-violet-500/20">
-                <span class="text-white text-[11px] font-semibold">{{ iniciais() }}</span>
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center">
+                <span class="text-indigo-700 text-[11px] font-semibold">{{ iniciais() }}</span>
               </div>
-              <span class="text-[13px] text-slate-300 font-medium hidden sm:block">{{ auth.usuario()?.nome }}</span>
+              <span class="text-sm text-slate-600 hidden sm:block">{{ auth.usuario()?.nome }}</span>
             </div>
             <button (click)="auth.logout()"
-                    class="text-[12px] text-slate-500 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-white/[0.06] transition-all duration-200">
+                    class="text-xs text-slate-400 hover:text-slate-600 px-2 py-1 rounded hover:bg-slate-50 transition-colors cursor-pointer">
               Sair
             </button>
             <button (click)="menuAberto.set(!menuAberto())"
-                    class="md:hidden text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-white/[0.06] transition-all duration-200">
+                    class="md:hidden text-slate-500 hover:text-slate-700 p-1.5 rounded hover:bg-slate-50 transition-colors cursor-pointer">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 @if (menuAberto()) {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -63,29 +63,25 @@ import { AuthService } from '../../services/auth.service';
       </div>
 
       @if (menuAberto()) {
-        <div class="md:hidden border-t border-white/[0.06] px-4 pb-4 pt-3 space-y-1 bg-slate-900/95 backdrop-blur-xl animate-fade-in">
-          <a routerLink="/app/dashboard" routerLinkActive="!bg-white/[0.12] !text-white"
+        <div class="md:hidden border-t border-slate-200 px-4 pb-3 pt-2 space-y-1 bg-white">
+          <a routerLink="/app/dashboard" routerLinkActive="!text-indigo-600 !bg-indigo-50"
              [routerLinkActiveOptions]="{exact: true}" (click)="menuAberto.set(false)"
-             class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/[0.06] transition-all duration-200">
-            <svg class="w-4.5 h-4.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+             class="block px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
             Dashboard
           </a>
-          <a routerLink="/app/ncs" routerLinkActive="!bg-white/[0.12] !text-white"
+          <a routerLink="/app/ncs" routerLinkActive="!text-indigo-600 !bg-indigo-50"
              [routerLinkActiveOptions]="{exact: true}" (click)="menuAberto.set(false)"
-             class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/[0.06] transition-all duration-200">
-            <svg class="w-4.5 h-4.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-            Nao Conformidades
+             class="block px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
+            Não Conformidades
           </a>
-          <a routerLink="/app/ncs/nova" routerLinkActive="!bg-white/[0.12] !text-white"
+          <a routerLink="/app/ncs/nova" routerLinkActive="!text-indigo-600 !bg-indigo-50"
              (click)="menuAberto.set(false)"
-             class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/[0.06] transition-all duration-200">
-            <svg class="w-4.5 h-4.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/></svg>
+             class="block px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
             Abrir NC
           </a>
-          <a routerLink="/app/minha-fila" routerLinkActive="!bg-white/[0.12] !text-white"
+          <a routerLink="/app/minha-fila" routerLinkActive="!text-indigo-600 !bg-indigo-50"
              (click)="menuAberto.set(false)"
-             class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-white/[0.06] transition-all duration-200">
-            <svg class="w-4.5 h-4.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+             class="block px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
             Minha Fila
           </a>
         </div>
