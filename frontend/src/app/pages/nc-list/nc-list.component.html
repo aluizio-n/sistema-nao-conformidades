@@ -1,0 +1,131 @@
+<app-navbar />
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+  <div class="flex items-center justify-between mb-6 sm:mb-8">
+    <div>
+      <h2 class="text-lg sm:text-xl font-bold text-slate-800">Não Conformidades</h2>
+      <p class="text-sm text-slate-400 mt-0.5">{{ ncs().length }} registros encontrados</p>
+    </div>
+    <a routerLink="/app/ncs/nova"
+       class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+      <span class="hidden sm:inline">Nova NC</span>
+      <span class="sm:hidden">Nova</span>
+    </a>
+  </div>
+
+  <div class="bg-white rounded-lg border border-slate-200 p-4 mb-5">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+      <div class="col-span-2 sm:col-span-1 relative">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+        <input type="text" [(ngModel)]="filtros.busca" (ngModelChange)="buscar()"
+               placeholder="Buscar..."
+               class="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 outline-none transition-colors" />
+      </div>
+      <select [(ngModel)]="filtros.status" (ngModelChange)="buscar()"
+              class="px-3 py-2 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500/20 outline-none transition-colors text-slate-600">
+        <option value="">Status</option>
+        <option value="aberta">Aberta</option>
+        <option value="em_tratamento">Em Tratamento</option>
+        <option value="aguardando_verificacao">Ag. Verificação</option>
+        <option value="encerrada">Encerrada</option>
+        <option value="cancelada">Cancelada</option>
+      </select>
+      <select [(ngModel)]="filtros.gravidade" (ngModelChange)="buscar()"
+              class="px-3 py-2 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500/20 outline-none transition-colors text-slate-600">
+        <option value="">Gravidade</option>
+        <option value="baixa">Baixa</option>
+        <option value="media">Média</option>
+        <option value="alta">Alta</option>
+        <option value="critica">Crítica</option>
+      </select>
+      <select [(ngModel)]="filtros.tipo" (ngModelChange)="buscar()"
+              class="px-3 py-2 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500/20 outline-none transition-colors text-slate-600">
+        <option value="">Tipo</option>
+        <option value="produto">Produto</option>
+        <option value="processo">Processo</option>
+        <option value="material">Material</option>
+        <option value="seguranca">Segurança</option>
+        <option value="outro">Outro</option>
+      </select>
+      <button (click)="limparFiltros()"
+              class="px-3 py-2 border border-slate-300 rounded-md text-sm text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors flex items-center justify-center gap-1.5 cursor-pointer">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        Limpar
+      </button>
+    </div>
+  </div>
+
+  <div class="hidden md:block bg-white rounded-lg border border-slate-200 overflow-hidden">
+    <table class="w-full">
+      <thead>
+        <tr class="border-b border-slate-100 bg-slate-50">
+          <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Número</th>
+          <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Título</th>
+          <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Tipo</th>
+          <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Gravidade</th>
+          <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Status</th>
+          <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Prazo</th>
+          <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Abertura</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        @for (nc of ncs(); track nc.id) {
+          <tr class="hover:bg-slate-50 cursor-pointer transition-colors" [routerLink]="['/app/ncs', nc.id]">
+            <td class="px-4 py-3 text-xs font-mono text-slate-400">{{ nc.numero }}</td>
+            <td class="px-4 py-3 text-sm text-slate-700 max-w-[280px] truncate">{{ nc.titulo }}</td>
+            <td class="px-4 py-3 text-sm capitalize text-slate-500">{{ nc.tipo }}</td>
+            <td class="px-4 py-3"><span [class]="badgeGravidade(nc.gravidade)">{{ nc.gravidade }}</span></td>
+            <td class="px-4 py-3"><span [class]="badgeStatus(nc.status)">{{ formatStatus(nc.status) }}</span></td>
+            <td class="px-4 py-3 text-sm">
+              @if (nc.prazo_em) {
+                <span [class]="prazoVencido(nc) ? 'text-red-600 font-semibold' : 'text-slate-500'">{{ nc.prazo_em | date:'dd/MM/yy' }}</span>
+                @if (prazoVencido(nc)) { <span class="ml-1 text-[9px] bg-red-600 text-white px-1 py-0.5 rounded font-bold">!</span> }
+              } @else { <span class="text-slate-300">—</span> }
+            </td>
+            <td class="px-4 py-3 text-sm text-slate-400">{{ nc.abertura_em | date:'dd/MM/yy' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    @if (ncs().length === 0) {
+      <div class="text-center py-12">
+        <p class="text-slate-400 text-sm">Nenhuma NC encontrada</p>
+        <p class="text-slate-300 text-xs mt-1">Tente ajustar os filtros</p>
+      </div>
+    }
+  </div>
+
+  <div class="md:hidden space-y-2.5">
+    @for (nc of ncs(); track nc.id) {
+      <a [routerLink]="['/app/ncs', nc.id]"
+         class="block bg-white rounded-lg border border-slate-200 p-4 hover:bg-slate-50 transition-colors">
+        <div class="flex items-start justify-between mb-2">
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="text-xs font-mono text-slate-400">{{ nc.numero }}</span>
+            <span [class]="badgeGravidade(nc.gravidade)">{{ nc.gravidade }}</span>
+            <span [class]="badgeStatus(nc.status)">{{ formatStatus(nc.status) }}</span>
+          </div>
+          @if (prazoVencido(nc)) {
+            <span class="text-[10px] bg-red-600 text-white px-1.5 py-0.5 rounded font-bold shrink-0">VENCIDO</span>
+          }
+        </div>
+        <p class="text-sm text-slate-700 mb-2">{{ nc.titulo }}</p>
+        <div class="flex items-center gap-3 text-xs text-slate-400">
+          <span class="capitalize">{{ nc.tipo }}</span>
+          <span>{{ nc.abertura_em | date:'dd/MM/yy' }}</span>
+          @if (nc.prazo_em) {
+            <span [class]="prazoVencido(nc) ? 'text-red-600 font-medium' : ''">Prazo: {{ nc.prazo_em | date:'dd/MM/yy' }}</span>
+          }
+        </div>
+      </a>
+    }
+    @if (ncs().length === 0) {
+      <div class="bg-white rounded-lg border border-slate-200 p-10 text-center">
+        <p class="text-slate-400 text-sm">Nenhuma NC encontrada</p>
+        <p class="text-slate-300 text-xs mt-1">Tente ajustar os filtros</p>
+      </div>
+    }
+  </div>
+</div>
