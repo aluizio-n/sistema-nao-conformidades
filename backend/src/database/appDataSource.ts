@@ -1,15 +1,10 @@
-<<<<<<< HEAD
 import { DataSource } from 'typeorm';
-import { User } from '../entities/User.js';
-=======
-import { DataSource } from "typeorm";
-import { Usuario } from "../entities/Usuario.js";
-import { NaoConformidade } from "../entities/NaoConformidade.js";
-import { AcaoCorretiva } from "../entities/AcaoCorretiva.js";
->>>>>>> 9782cdc (feat: front e back)
+import { Usuario } from '../entities/Usuario.js';
+import { NaoConformidade } from '../entities/NaoConformidade.js';
+import { AcaoCorretiva } from '../entities/AcaoCorretiva.js';
 
 export const appDataSource = new DataSource({
-    type: "postgres",
+    type: 'postgres',
     host: process.env.DB_HOST as string,
     port: Number(process.env.DB_PORT),
     username: process.env.DB_USER as string,
@@ -17,10 +12,5 @@ export const appDataSource = new DataSource({
     database: process.env.DB_NAME as string,
     synchronize: true,
     logging: false,
-<<<<<<< HEAD
-    entities: [User]
-})
-=======
     entities: [Usuario, NaoConformidade, AcaoCorretiva],
 });
->>>>>>> 9782cdc (feat: front e back)

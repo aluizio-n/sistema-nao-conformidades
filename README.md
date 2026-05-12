@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# sistema-nao-conformidades
-
-Módulo final - INDT
-=======
 # QualidadePIM - Sistema de Registro de Nao Conformidades
 
 Sistema web para registro, acompanhamento e encerramento de nao conformidades de qualidade industrial. Projeto final do modulo Full Stack - INDT.
@@ -33,8 +28,8 @@ docker compose up -d
 ```bash
 cd backend
 npm install
-npm run seed
-npm run dev
+npm run seed    # popula o banco com dados de exemplo
+npm run dev     # inicia o servidor na porta 3000
 ```
 
 ### 3. Frontend
@@ -42,7 +37,7 @@ npm run dev
 ```bash
 cd frontend
 npm install
-ng serve
+ng serve        # inicia o frontend na porta 4200
 ```
 
 Acesse `http://localhost:4200` no navegador.
@@ -82,4 +77,3 @@ Acesse `http://localhost:4200` no navegador.
 | POST   | /api/ncs/:id/acoes| Cria acao corretiva          |
 | PATCH  | /api/acoes/:id    | Atualiza acao corretiva      |
 | GET    | /api/dashboard    | Indicadores e ranking        |
->>>>>>> ee4baa6 (feat: read me)
