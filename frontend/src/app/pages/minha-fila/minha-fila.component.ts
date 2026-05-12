@@ -16,10 +16,19 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
       </div>
 
       @if (ncs().length === 0) {
+<<<<<<< HEAD
         <div class="bg-white rounded-lg border border-slate-200 p-12 text-center">
           <svg class="w-10 h-10 text-slate-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
           <p class="text-slate-500 text-sm font-medium">Nenhuma NC atribuída a você</p>
           <p class="text-slate-400 text-xs mt-1">Suas NCs aparecerão aqui quando atribuídas</p>
+=======
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 sm:p-20 text-center animate-scale-in">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center mx-auto mb-5 shadow-sm">
+            <svg class="w-7 h-7 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          </div>
+          <p class="text-slate-500 text-sm font-medium">Nenhuma NC atribuida a voce</p>
+          <p class="text-slate-300 text-xs mt-1.5">Suas NCs aparecerão aqui quando atribuidas</p>
+>>>>>>> parent of 2a3f00f (fix: writing)
         </div>
       } @else {
         <div class="space-y-2.5">
