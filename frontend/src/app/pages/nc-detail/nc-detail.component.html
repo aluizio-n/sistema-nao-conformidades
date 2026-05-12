@@ -155,6 +155,11 @@
         </div>
       </div>
     </div>
+  } @else if (erro()) {
+    <div class="text-center py-20">
+      <p class="text-red-500 text-sm font-medium">{{ erro() }}</p>
+      <button (click)="voltar()" class="mt-4 text-sm text-indigo-600 hover:underline cursor-pointer">Voltar para a lista</button>
+    </div>
   } @else {
     <div class="text-center py-20">
       <div class="inline-block w-8 h-8 border-[3px] border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>

@@ -16,6 +16,7 @@ export class NcDetailComponent implements OnInit {
   private router = inject(Router);
 
   nc = signal<NaoConformidade | null>(null);
+  erro = signal<string | null>(null);
   usuarios = signal<Usuario[]>([]);
   responsavelId: number | null = null;
   prazo = '';
@@ -30,13 +31,16 @@ export class NcDetailComponent implements OnInit {
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.carregarNC(id);
-    this.ncService.listarUsuarios().subscribe((u) => this.usuarios.set(u));
+    this.ncService.listarUsuarios().subscribe({
+      next: (u) => this.usuarios.set(u),
+      error: () => {},
+    });
   }
 
   carregarNC(id: number) {
     this.ncService.buscarPorId(id).subscribe({
       next: (nc) => { this.nc.set(nc); this.responsavelId = nc.responsavel_id; this.prazo = nc.prazo_em ? nc.prazo_em.substring(0, 10) : ''; this.causaRaiz = nc.causa_raiz ?? ''; },
-      error: () => this.router.navigate(['/app/ncs']),
+      error: (e) => { console.error('Erro ao carregar NC:', e); this.erro.set('Não foi possível carregar esta NC.'); },
     });
   }
 
