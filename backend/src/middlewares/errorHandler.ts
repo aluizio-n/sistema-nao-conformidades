@@ -12,11 +12,11 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
 
     if (err instanceof ZodError) {
         return res.status(400).json({
-            message: "Dados invalidos",
+            message: "Invalid data",
             details: err.flatten()
         });
     }
 
     console.error(err);
-    return res.status(500).json({ message: "Erro interno" });
+    return res.status(500).json({ message: "Internal Error" });
 };

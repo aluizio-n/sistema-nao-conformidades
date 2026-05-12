@@ -7,11 +7,10 @@
     "type": "module",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "tsx watch src/server.ts",
-        "dev:nodemon": "nodemon --watch src --ext ts --exec \"tsx src/server.ts\"",
-        "build": "npx tsc ",
-        "start": "node dist/server.js"
+        "build": "npx tsc",
+        "start": "node dist/server.js",
+        "seed": "tsx src/database/seed.ts"
     },
     "dependencies": {
         "bcryptjs": "^3.0.3",

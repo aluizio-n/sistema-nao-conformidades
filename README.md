@@ -33,8 +33,8 @@ docker compose up -d
 ```bash
 cd backend
 npm install
-npm run seed    # popula o banco com dados de exemplo
-npm run dev     # inicia o servidor na porta 3000
+npm run seed
+npm run dev
 ```
 
 ### 3. Frontend
@@ -42,7 +42,7 @@ npm run dev     # inicia o servidor na porta 3000
 ```bash
 cd frontend
 npm install
-ng serve        # inicia o frontend na porta 4200
+ng serve
 ```
 
 Acesse `http://localhost:4200` no navegador.
