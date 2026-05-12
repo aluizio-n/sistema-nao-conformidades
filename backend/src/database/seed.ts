@@ -38,8 +38,8 @@ async function seed() {
     const ncs = await ncRepo.save([
         {
             numero: `NC-${agora.getFullYear()}-0001`,
-            titulo: "Peca fora de tolerancia dimensional",
-            descricao: "Lote 4521 apresentou pecas com diametro 2mm acima do especificado na linha de montagem A3.",
+            titulo: "Peça fora de tolerância dimensional",
+            descricao: "Lote 4521 apresentou peças com diâmetro 2mm acima do especificado na linha de montagem A3.",
             tipo: "produto",
             gravidade: "alta",
             status: "aberta",
@@ -50,13 +50,13 @@ async function seed() {
         },
         {
             numero: `NC-${agora.getFullYear()}-0002`,
-            titulo: "Procedimento de limpeza nao seguido",
-            descricao: "Operador nao realizou limpeza da esteira conforme POP-012 antes do inicio do turno.",
+            titulo: "Procedimento de limpeza não seguido",
+            descricao: "Operador não realizou limpeza da esteira conforme POP-012 antes do início do turno.",
             tipo: "processo",
             gravidade: "media",
             status: "em_tratamento",
             linha_processo: "Linha B1",
-            setor: "Producao",
+            setor: "Produção",
             aberto_por: maria!.id,
             responsavel_id: pedro!.id,
             abertura_em: duasSemanas,
@@ -65,7 +65,7 @@ async function seed() {
         {
             numero: `NC-${agora.getFullYear()}-0003`,
             titulo: "Material recebido com laudo vencido",
-            descricao: "Fornecedor enviou resina epóxi com certificado de qualidade vencido ha 30 dias.",
+            descricao: "Fornecedor enviou resina epóxi com certificado de qualidade vencido há 30 dias.",
             tipo: "material",
             gravidade: "critica",
             status: "aguardando_verificacao",
@@ -75,17 +75,17 @@ async function seed() {
             responsavel_id: ana!.id,
             abertura_em: duasSemanas,
             prazo_em: prazoFuturo,
-            causa_raiz: "Falha no controle de validade de laudos pelo fornecedor. Ausencia de verificacao na entrada.",
+            causa_raiz: "Falha no controle de validade de laudos pelo fornecedor. Ausência de verificação na entrada.",
         },
         {
             numero: `NC-${agora.getFullYear()}-0004`,
-            titulo: "EPI sem certificado de aprovacao",
-            descricao: "Luvas de protecao quimica em uso sem CA valido. Detectado em auditoria interna.",
+            titulo: "EPI sem certificado de aprovação",
+            descricao: "Luvas de proteção química em uso sem CA válido. Detectado em auditoria interna.",
             tipo: "seguranca",
             gravidade: "critica",
             status: "em_tratamento",
             linha_processo: "Linha C2",
-            setor: "Seguranca",
+            setor: "Segurança",
             aberto_por: maria!.id,
             responsavel_id: pedro!.id,
             abertura_em: umaSemanaAtras,
@@ -94,7 +94,7 @@ async function seed() {
         {
             numero: `NC-${agora.getFullYear()}-0005`,
             titulo: "Temperatura do forno fora da faixa",
-            descricao: "Forno de cura registrou 185C quando o parametro exige 200C +/- 5C durante 2 horas.",
+            descricao: "Forno de cura registrou 185°C quando o parâmetro exige 200°C ±5°C durante 2 horas.",
             tipo: "processo",
             gravidade: "alta",
             status: "encerrada",
@@ -105,7 +105,7 @@ async function seed() {
             abertura_em: duasSemanas,
             prazo_em: umaSemanaAtras,
             encerramento_em: new Date(agora.getTime() - 2 * 24 * 60 * 60 * 1000),
-            causa_raiz: "Sensor de temperatura descalibrado. Calibracao atrasada em 15 dias.",
+            causa_raiz: "Sensor de temperatura descalibrado. Calibração atrasada em 15 dias.",
         },
         {
             numero: `NC-${agora.getFullYear()}-0006`,
@@ -115,7 +115,7 @@ async function seed() {
             gravidade: "baixa",
             status: "aberta",
             linha_processo: "Estoque PA",
-            setor: "Logistica",
+            setor: "Logística",
             aberto_por: maria!.id,
             abertura_em: agora,
         },
@@ -140,24 +140,24 @@ async function seed() {
         },
         {
             nc_id: ncs[2]!.id,
-            descricao: "Implementar checklist de verificacao de laudos no recebimento",
+            descricao: "Implementar checklist de verificação de laudos no recebimento",
             responsavel_id: ana!.id,
             prazo_em: prazoFuturo,
             status: "pendente",
         },
         {
             nc_id: ncs[3]!.id,
-            descricao: "Substituir todas as luvas sem CA valido",
+            descricao: "Substituir todas as luvas sem CA válido",
             responsavel_id: pedro!.id,
             prazo_em: new Date(agora.getTime() + 2 * 24 * 60 * 60 * 1000),
             status: "em_andamento",
         },
     ]);
 
-    console.log("Seed concluido!");
-    console.log(`  ${usuarios.length} usuarios criados`);
-    console.log(`  ${ncs.length} nao conformidades criadas`);
-    console.log(`  4 acoes corretivas criadas`);
+    console.log("Seed concluído!");
+    console.log(`  ${usuarios.length} usuários criados`);
+    console.log(`  ${ncs.length} não conformidades criadas`);
+    console.log(`  4 ações corretivas criadas`);
     console.log("\nCredenciais de acesso:");
     console.log("  Email: carlos@qualidade.com | Senha: 123456 (inspetor)");
     console.log("  Email: ana@qualidade.com    | Senha: 123456 (gestor)");
