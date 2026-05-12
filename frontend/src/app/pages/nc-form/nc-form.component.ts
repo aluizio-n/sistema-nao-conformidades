@@ -31,7 +31,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
           <label class="block text-[13px] font-semibold text-slate-600 mb-2">Titulo <span class="text-rose-400">*</span></label>
           <input type="text" [(ngModel)]="nc.titulo" name="titulo" required
                  class="w-full px-4 py-3 bg-slate-50/80 border border-slate-200/80 rounded-xl text-[13px] focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 outline-none transition-all duration-200 hover:border-slate-300"
-                 placeholder="Resumo curto da nao conformidade" />
+                 placeholder="Resumo curto da não conformidade" />
         </div>
 
         <div>
