@@ -30,13 +30,8 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
         <div>
           <label class="block text-sm font-medium text-slate-700 mb-1.5">Título <span class="text-red-500">*</span></label>
           <input type="text" [(ngModel)]="nc.titulo" name="titulo" required
-<<<<<<< HEAD
                  class="w-full px-3 py-2.5 border border-slate-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 outline-none transition-colors"
                  placeholder="Resumo curto da não conformidade" />
-=======
-                 class="w-full px-4 py-3 bg-slate-50/80 border border-slate-200/80 rounded-xl text-[13px] focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 outline-none transition-all duration-200 hover:border-slate-300"
-                 placeholder="Resumo curto da nao conformidade" />
->>>>>>> parent of 2a3f00f (fix: writing)
         </div>
 
         <div>
