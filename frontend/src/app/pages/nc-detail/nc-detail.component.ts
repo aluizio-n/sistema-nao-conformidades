@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { NcService, type NaoConformidade, type AcaoCorretiva, type Usuario } from '../../services/nc.service';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-nc-detail',
@@ -14,6 +15,7 @@ export class NcDetailComponent implements OnInit {
   private ncService = inject(NcService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  auth = inject(AuthService);
 
   nc = signal<NaoConformidade | null>(null);
   erro = signal<string | null>(null);

@@ -19,14 +19,18 @@
              class="px-3 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
             NCs
           </a>
-          <a routerLink="/app/ncs/nova" routerLinkActive="!text-indigo-600 !bg-indigo-50"
-             class="px-3 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
-            Abrir NC
-          </a>
-          <a routerLink="/app/minha-fila" routerLinkActive="!text-indigo-600 !bg-indigo-50"
-             class="px-3 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
-            Minha Fila
-          </a>
+          @if (auth.podeAbrirNC()) {
+            <a routerLink="/app/ncs/nova" routerLinkActive="!text-indigo-600 !bg-indigo-50"
+               class="px-3 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
+              Abrir NC
+            </a>
+          }
+          @if (auth.podeVerFila()) {
+            <a routerLink="/app/minha-fila" routerLinkActive="!text-indigo-600 !bg-indigo-50"
+               class="px-3 py-1.5 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
+              Minha Fila
+            </a>
+          }
         </div>
       </div>
       <div class="flex items-center gap-3">
@@ -66,16 +70,20 @@
          class="block px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
         Não Conformidades
       </a>
-      <a routerLink="/app/ncs/nova" routerLinkActive="!text-indigo-600 !bg-indigo-50"
-         (click)="menuAberto.set(false)"
-         class="block px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
-        Abrir NC
-      </a>
-      <a routerLink="/app/minha-fila" routerLinkActive="!text-indigo-600 !bg-indigo-50"
-         (click)="menuAberto.set(false)"
-         class="block px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
-        Minha Fila
-      </a>
+      @if (auth.podeAbrirNC()) {
+        <a routerLink="/app/ncs/nova" routerLinkActive="!text-indigo-600 !bg-indigo-50"
+           (click)="menuAberto.set(false)"
+           class="block px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
+          Abrir NC
+        </a>
+      }
+      @if (auth.podeVerFila()) {
+        <a routerLink="/app/minha-fila" routerLinkActive="!text-indigo-600 !bg-indigo-50"
+           (click)="menuAberto.set(false)"
+           class="block px-3 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors">
+          Minha Fila
+        </a>
+      }
     </div>
   }
 </nav>

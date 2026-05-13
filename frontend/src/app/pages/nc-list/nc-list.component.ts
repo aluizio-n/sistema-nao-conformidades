@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { NcService, type NaoConformidade, type FiltrosNC } from '../../services/nc.service';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-nc-list',
@@ -12,6 +13,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 })
 export class NcListComponent implements OnInit {
   private ncService = inject(NcService);
+  auth = inject(AuthService);
   ncs = signal<NaoConformidade[]>([]);
   filtros: FiltrosNC = {};
 

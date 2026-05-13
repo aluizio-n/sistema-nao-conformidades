@@ -31,3 +31,11 @@ export function authMiddleware(req: Request, _res: Response, next: NextFunction)
         throw new AppError("Token invalido ou expirado", 401);
     }
 }
+
+export function requirePerfil(...perfis: string[]) {
+    return (req: Request, _res: Response, next: NextFunction): void => {
+        if (!req.user) throw new AppError("Nao autenticado", 401);
+        if (!perfis.includes(req.user.perfil)) throw new AppError("Acesso negado", 403);
+        next();
+    };
+}

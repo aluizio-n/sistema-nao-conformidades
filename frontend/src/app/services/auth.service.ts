@@ -27,6 +27,13 @@ export class AuthService {
   usuario = this._usuario.asReadonly();
   logado = computed(() => !!this._usuario());
 
+  perfil = computed(() => this._usuario()?.perfil ?? null);
+  podeAbrirNC = computed(() => ['inspetor', 'gestor'].includes(this._usuario()?.perfil ?? ''));
+  podeGerenciarNC = computed(() => this._usuario()?.perfil === 'gestor');
+  podeCriarAcao = computed(() => this._usuario()?.perfil === 'gestor');
+  podeAvancarAcao = computed(() => ['gestor', 'responsavel'].includes(this._usuario()?.perfil ?? ''));
+  podeVerFila = computed(() => ['gestor', 'responsavel'].includes(this._usuario()?.perfil ?? ''));
+
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, senha: string) {
