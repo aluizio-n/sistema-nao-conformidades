@@ -122,15 +122,18 @@ export async function atualizarNc(id: number, data: {
         nc.prazo_em = new Date(data.prazo_em);
     }
 
+    if (data.causa_raiz !== undefined) {
+        nc.causa_raiz = data.causa_raiz;
+    }
+
     if (data.status) {
+        if (data.status === "encerrada" && !nc.causa_raiz?.trim()) {
+            throw new AppError("Causa raiz e obrigatoria para encerrar a NC", 400);
+        }
         nc.status = data.status;
         if (data.status === "encerrada") {
             nc.encerramento_em = new Date();
         }
-    }
-
-    if (data.causa_raiz !== undefined) {
-        nc.causa_raiz = data.causa_raiz;
     }
 
     await ncRepo().save(nc);
