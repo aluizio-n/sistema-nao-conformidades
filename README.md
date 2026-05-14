@@ -1,4 +1,4 @@
-# QualidadePIM - Sistema de Registro de Nao Conformidades
+# NC Status - Sistema de Registro de Nao Conformidades
 
 Sistema web para registro, acompanhamento e encerramento de nao conformidades de qualidade industrial. Projeto final do modulo Full Stack - INDT.
 
