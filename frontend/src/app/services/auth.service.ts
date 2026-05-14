@@ -30,9 +30,17 @@ export class AuthService {
   perfil = computed(() => this._usuario()?.perfil ?? null);
   podeAbrirNC = computed(() => ['inspetor', 'gestor'].includes(this._usuario()?.perfil ?? ''));
   podeGerenciarNC = computed(() => this._usuario()?.perfil === 'gestor');
-  podeCriarAcao = computed(() => this._usuario()?.perfil === 'gestor');
   podeAvancarAcao = computed(() => ['gestor', 'responsavel'].includes(this._usuario()?.perfil ?? ''));
   podeVerFila = computed(() => ['gestor', 'responsavel'].includes(this._usuario()?.perfil ?? ''));
+
+  podeCriarAcaoNc(nc: { responsavel_id: number | null } | null): boolean {
+    if (!nc) return false;
+    const u = this._usuario();
+    if (!u) return false;
+    if (u.perfil === 'gestor') return true;
+    if (u.perfil === 'responsavel' && nc.responsavel_id === u.id) return true;
+    return false;
+  }
 
   constructor(private http: HttpClient, private router: Router) {}
 

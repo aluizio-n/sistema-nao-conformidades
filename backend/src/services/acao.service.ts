@@ -18,9 +18,13 @@ export async function criarAcao(ncId: number, data: {
     descricao: string;
     responsavel_id: number;
     prazo_em: string;
-}) {
+}, user: { id: number; perfil: string }) {
     const nc = await ncRepo().findOneBy({ id: ncId });
     if (!nc) throw new AppError("NC nao encontrada", 404);
+
+    if (user.perfil === "responsavel" && nc.responsavel_id !== user.id) {
+        throw new AppError("Voce so pode criar acoes em NCs atribuidas a voce", 403);
+    }
 
     const acao = acaoRepo().create({
         nc_id: ncId,

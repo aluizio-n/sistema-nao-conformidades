@@ -22,7 +22,7 @@ export async function listarPorNc(req: Request, res: Response) {
 export async function criar(req: Request, res: Response) {
     const ncId = Number(req.params.ncId);
     const data = criarAcaoSchema.parse(req.body);
-    const acao = await acaoService.criarAcao(ncId, data);
+    const acao = await acaoService.criarAcao(ncId, data, req.user!);
     res.status(201).json(acao);
 }
 
