@@ -2,6 +2,7 @@ import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 interface LoginResponse {
   token: string;
@@ -21,7 +22,7 @@ interface UserPayload {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly API = 'http://localhost:3000/api';
+  private readonly API = environment.apiUrl;
   private _usuario = signal<UserPayload | null>(this.carregarUsuario());
 
   usuario = this._usuario.asReadonly();

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 export interface DashboardData {
   indicadores: {
@@ -25,7 +26,7 @@ export interface DashboardData {
 
 @Injectable({ providedIn: 'root' })
 export class DashboardService {
-  private readonly API = 'http://localhost:3000/api';
+  private readonly API = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 

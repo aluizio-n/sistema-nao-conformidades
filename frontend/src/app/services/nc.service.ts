@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 export interface NaoConformidade {
   id: number;
@@ -50,7 +51,7 @@ export interface FiltrosNC {
 
 @Injectable({ providedIn: 'root' })
 export class NcService {
-  private readonly API = 'http://localhost:3000/api';
+  private readonly API = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
