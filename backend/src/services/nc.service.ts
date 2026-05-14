@@ -1,8 +1,11 @@
 import { appDataSource } from "../database/appDataSource.js";
 import { NaoConformidade } from "../entities/NaoConformidade.js";
+import { Usuario } from "../entities/Usuario.js";
+import { PERFIS_RESPONSAVEIS } from "./usuario.service.js";
 import { AppError } from "../errors/AppError.js";
 
 const ncRepo = () => appDataSource.getRepository(NaoConformidade);
+const usuarioRepo = () => appDataSource.getRepository(Usuario);
 
 const TIPOS_VALIDOS = ["produto", "processo", "material", "seguranca", "outro"];
 const GRAVIDADES_VALIDAS = ["baixa", "media", "alta", "critica"];
@@ -111,11 +114,21 @@ export async function atualizarNc(id: number, data: {
         }
     }
 
-    if (data.responsavel_id && nc.status === "aberta") {
+    if (data.responsavel_id) {
+        const responsavel = await usuarioRepo().findOneBy({ id: data.responsavel_id });
+        if (!responsavel || !responsavel.ativo) {
+            throw new AppError("Responsavel invalido", 400);
+        }
+        if (!PERFIS_RESPONSAVEIS.includes(responsavel.perfil)) {
+            throw new AppError(
+                `Responsavel deve ter perfil ${PERFIS_RESPONSAVEIS.join(" ou ")}`,
+                400,
+            );
+        }
         nc.responsavel_id = data.responsavel_id;
-        nc.status = "em_tratamento";
-    } else if (data.responsavel_id) {
-        nc.responsavel_id = data.responsavel_id;
+        if (nc.status === "aberta") {
+            nc.status = "em_tratamento";
+        }
     }
 
     if (data.prazo_em) {
