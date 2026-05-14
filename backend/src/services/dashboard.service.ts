@@ -8,7 +8,7 @@ export async function obterDashboard() {
     const [indicadores] = await appDataSource.query(`
         SELECT
             COUNT(*) FILTER (WHERE status = 'aberta') AS total_abertas,
-            COUNT(*) FILTER (WHERE gravidade IN ('critica', 'alta') AND status NOT IN ('encerrada', 'cancelada')) AS criticas_abertas,
+            COUNT(*) FILTER (WHERE gravidade = 'critica' AND status NOT IN ('encerrada', 'cancelada')) AS criticas_abertas,
             COUNT(*) FILTER (WHERE prazo_em IS NOT NULL AND prazo_em < NOW() AND encerramento_em IS NULL AND status NOT IN ('encerrada', 'cancelada')) AS prazo_vencido,
             COUNT(*) FILTER (WHERE status = 'encerrada' AND encerramento_em >= $1 AND encerramento_em <= $2) AS encerradas_mes
         FROM nao_conformidade
